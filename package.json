@@ -1,0 +1,20 @@
+{
+  "private": true,
+  "scripts": {
+    "pretest": "tsc -p src",
+    "test": "node runTest.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.4",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "@types/mocha": "^10.0.7",
+    "@types/vscode": "^1.92.0",
+    "@vscode/debugprotocol": "^1.67.0",
+    "@vscode/test-electron": "^2.4.1",
+    "globby": "^14.0.2",
+    "mocha": "^10.7.3",
+    "pino": "^9.4.0"
+  }
+}

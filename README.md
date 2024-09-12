@@ -1,1 +1,1 @@
-# moonbit-extension-check
+## moonbit-vsc-extension-check

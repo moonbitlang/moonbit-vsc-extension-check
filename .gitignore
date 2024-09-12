@@ -1,0 +1,8 @@
+.DS_Store
+node_modules
+
+/.vscode-test
+/out/*
+!/out/esm.js
+!/out/package.json
+!/fixtures/hello/.vscode/settings.json
