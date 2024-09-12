@@ -1,0 +1,1 @@
+# moonbit-extension-check
