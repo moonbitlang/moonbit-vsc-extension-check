@@ -8,7 +8,7 @@ await runVSCodeCommand(["--install-extension", "moonbit.moonbit-lang-nightly"]);
 
 await runTests({
   extensionTestsPath: path.resolve(import.meta.dirname, "./out/prepare.js"),
-  launchArgs: ["--disable-gpu", testWorkspace],
+  launchArgs: ["--disable-gpu", testWorkspace, '--user-data-dir', `${os.tmpdir()}/vscode-test-profile`],
 });
 
 await runTests({
@@ -16,5 +16,5 @@ await runTests({
   extensionTestsEnv: {
     PATH: `${process.env.PATH}:${os.homedir()}/.moon/bin`
   },
-  launchArgs: ["--disable-gpu", testWorkspace],
+  launchArgs: ["--disable-gpu", testWorkspace, '--user-data-dir', `${os.tmpdir()}/vscode-test-profile`],
 });
