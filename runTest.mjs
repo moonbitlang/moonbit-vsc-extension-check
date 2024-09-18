@@ -14,7 +14,8 @@ await runTests({
 await runTests({
   extensionTestsPath: path.resolve(import.meta.dirname, "./out/index.js"),
   extensionTestsEnv: {
-    PATH: `${process.env.PATH}:${os.homedir()}/.moon/bin`
+    // This only works for linux
+    PATH: os.platform() === 'win32' ? `${process.env.PATH};${os.homedir()}\\.moon\\bin` : `${process.env.PATH}:${os.homedir()}/.moon/bin`,
   },
   launchArgs: ["--disable-gpu", testWorkspace, '--user-data-dir', `${os.tmpdir()}/vscode-test-profile`],
 });

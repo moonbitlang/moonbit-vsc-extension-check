@@ -2,6 +2,7 @@ import * as Mocha from "mocha";
 import * as path from "path";
 import * as esm from "./esm";
 import * as vscode from "vscode";
+import * as os from "os";
 
 export async function run(testsRoot: string): Promise<void> {
   const rootDir = path.dirname(testsRoot);
@@ -10,6 +11,15 @@ export async function run(testsRoot: string): Promise<void> {
   await vscode.commands.executeCommand("moonbit.install-moonbit", {
     silent: true,
   });
+
+  // Workaround
+  if (os.platform() === 'win32') {
+    process.env.PATH = `${process.env.PATH};${os.homedir()}\\.moon\\bin`;
+  } else {
+    process.env.PATH = `${process.env.PATH}:${os.homedir()}/.moon/bin`;
+  }
+
+  console.log(`PATH: ${process.env.PATH}`);
 
   const files = await globby("**/*.test.js", {
     cwd: rootDir,
