@@ -15,6 +15,7 @@ export async function run(testsRoot: string): Promise<void> {
   // Workaround
   if (os.platform() === 'win32') {
     process.env.PATH = `${process.env.PATH};${os.homedir()}\\.moon\\bin`;
+    await new Promise((resolve) => setTimeout(resolve, 2000));
   } else {
     process.env.PATH = `${process.env.PATH}:${os.homedir()}/.moon/bin`;
   }
