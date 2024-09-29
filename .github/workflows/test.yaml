@@ -40,13 +40,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Cache VS Code download
-        uses: actions/cache@v4
-        with:
-          path: |
-            .vscode-test
-          key: vscode-test-cache-${{ steps.code-stable.outputs.VSCODE_VERSION }}
-
       - name: Run tests
         run: |
           export XDG_RUNTIME_DIR=/run/user/$(id -u)
