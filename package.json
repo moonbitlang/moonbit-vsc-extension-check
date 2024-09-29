@@ -13,6 +13,7 @@
     "@types/vscode": "^1.92.0",
     "@vscode/debugprotocol": "^1.67.0",
     "@vscode/test-electron": "^2.4.1",
+    "execa": "^9.4.0",
     "globby": "^14.0.2",
     "mocha": "^10.7.3",
     "pino": "^9.4.0"
