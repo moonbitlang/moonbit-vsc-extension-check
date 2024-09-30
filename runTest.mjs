@@ -44,4 +44,4 @@ const moonPath =
   os.platform() === "win32"
     ? `${os.homedir()}\\.moon\\bin\\moon.exe`
     : `${os.homedir()}/.moon/bin/moon`;
-await $({ stdout: "inherit", verbose: "short" })`${moonPath} version --all`;
+await $({ stdout: "inherit", verbose: "short", reject: false })`${moonPath} version --all`;
