@@ -18,9 +18,11 @@ test("core sources", async () => {
     createDebugAdapterTracker(session: vscode.DebugSession): vscode.DebugAdapterTracker {
       return {
         onWillReceiveMessage: (message) => {
+          console.log(JSON.stringify({'DebugAdapterTracker__onWillReceiveMessage': message}));
           willReceiveMessage.fire(message);
         },
         onDidSendMessage: (message) => {
+          console.log(JSON.stringify({'DebugAdapterTracker__onDidSendMessage': message}));
           didSendMessage.fire(message);
         },
       };
