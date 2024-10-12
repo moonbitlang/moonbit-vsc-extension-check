@@ -21,11 +21,11 @@ jobs:
         run: |
           "C:\Users\runneradmin\.moon\bin" | Out-File -FilePath $env:GITHUB_PATH -Append
 
-      - name: Setup binary path for macOS
-        if: ${{ matrix.os == 'macos-latest' }}
+      - name: Setup binary path for non-windows
+        if: ${{ matrix.os != 'windows-latest' }}
+        shell: bash
         run: |
-          mkdir -p "$HOME/.moon/bin"
-          echo "$HOME/.moon/bin" >> $GITHUB_PATH
+          echo "/Users/runner/.moon/bin" >> $GITHUB_PATH
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v2

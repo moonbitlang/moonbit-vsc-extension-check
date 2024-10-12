@@ -23,15 +23,13 @@ await runTests({
   ],
 });
 
+process.env.PATH =
+  os.platform() === "win32"
+    ? `${os.homedir()}\\.moon\\bin;${process.env.PATH}`
+    : `${os.homedir()}/.moon/bin:${process.env.PATH}`;
+
 await runTests({
   extensionTestsPath: path.resolve(import.meta.dirname, "./out/index.js"),
-  extensionTestsEnv: {
-    // This only works for linux
-    PATH:
-      os.platform() === "win32"
-        ? `${process.env.PATH};${os.homedir()}\\.moon\\bin`
-        : `${process.env.PATH}:${os.homedir()}/.moon/bin`,
-  },
   launchArgs: [
     "--disable-gpu",
     testWorkspace,
@@ -44,4 +42,8 @@ const moonPath =
   os.platform() === "win32"
     ? `${os.homedir()}\\.moon\\bin\\moon.exe`
     : `${os.homedir()}/.moon/bin/moon`;
-await $({ stdout: "inherit", verbose: "short", reject: false })`${moonPath} version --all`;
+await $({
+  stdout: "inherit",
+  verbose: "short",
+  reject: false,
+})`${moonPath} version --all`;

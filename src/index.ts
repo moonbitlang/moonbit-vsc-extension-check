@@ -4,6 +4,8 @@ import * as esm from "./esm";
 import * as vscode from "vscode";
 import * as os from "os";
 
+const testWorkspace = path.join(__dirname, "../fixtures/hello");
+
 export async function run(testsRoot: string): Promise<void> {
   const rootDir = path.dirname(testsRoot);
   const { globby } = await esm.importGlobby();
@@ -11,6 +13,11 @@ export async function run(testsRoot: string): Promise<void> {
   await vscode.commands.executeCommand("moonbit.install-moonbit", {
     silent: true,
   });
+
+  // Wait for the installation to finish. This is a workaround for the
+  // "moonbit.install-moonbit" command's bug.
+  // TODO: Remove this workaround when the bug is fixed.
+  await new Promise((resolve) => setTimeout(resolve, 20000));
 
   // Workaround
   if (os.platform() === 'win32') {
@@ -21,6 +28,13 @@ export async function run(testsRoot: string): Promise<void> {
   }
 
   console.log(`PATH: ${process.env.PATH}`);
+
+  const { $ } = await esm.importExeca();
+  const exePath =
+  os.platform() === "win32"
+    ? `${os.homedir()}\\.moon\\bin\\moon.exe`
+    : `${os.homedir()}/.moon/bin/moon`;
+  await $({ cwd: testWorkspace })`${exePath} check --target js`;
 
   const files = await globby("**/*.test.js", {
     cwd: rootDir,
