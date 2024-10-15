@@ -14,11 +14,6 @@ export async function run(testsRoot: string): Promise<void> {
     silent: true,
   });
 
-  // Wait for the installation to finish. This is a workaround for the
-  // "moonbit.install-moonbit" command's bug.
-  // TODO: Remove this workaround when the bug is fixed.
-  await new Promise((resolve) => setTimeout(resolve, 20000));
-
   // Workaround
   if (os.platform() === "win32") {
     process.env.PATH = `${process.env.PATH};${os.homedir()}\\.moon\\bin`;
