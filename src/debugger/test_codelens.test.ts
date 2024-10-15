@@ -8,7 +8,7 @@ test("debug codelens", async () => {
   const workspaceUri = vscode.workspace.workspaceFolders![0].uri;
   using _autoDispose1 = await addBreakpoint(new vscode.SourceBreakpoint(
     new vscode.Location(
-      workspaceUri.with({ path: Path.join(workspaceUri.path, "src/lib/hello_test.mbt") }),
+      vscode.Uri.joinPath(workspaceUri, "src/lib/hello_test.mbt"),
       new vscode.Position(1, 0)
     )
   ));

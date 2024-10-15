@@ -20,7 +20,7 @@ export async function run(testsRoot: string): Promise<void> {
   await new Promise((resolve) => setTimeout(resolve, 20000));
 
   // Workaround
-  if (os.platform() === 'win32') {
+  if (os.platform() === "win32") {
     process.env.PATH = `${process.env.PATH};${os.homedir()}\\.moon\\bin`;
     await new Promise((resolve) => setTimeout(resolve, 2000));
   } else {
@@ -31,9 +31,9 @@ export async function run(testsRoot: string): Promise<void> {
 
   const { $ } = await esm.importExeca();
   const exePath =
-  os.platform() === "win32"
-    ? `${os.homedir()}\\.moon\\bin\\moon.exe`
-    : `${os.homedir()}/.moon/bin/moon`;
+    os.platform() === "win32"
+      ? `${os.homedir()}\\.moon\\bin\\moon.exe`
+      : `${os.homedir()}/.moon/bin/moon`;
   await $({ cwd: testWorkspace })`${exePath} check --target js`;
 
   const files = await globby("**/*.test.js", {

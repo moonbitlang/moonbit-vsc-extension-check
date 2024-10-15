@@ -8,7 +8,7 @@ test("func that just return constant", async () => {
   const workspaceUri = vscode.workspace.workspaceFolders![0].uri;
   using _autoDispose1 = await addBreakpoint(new vscode.SourceBreakpoint(
     new vscode.Location(
-      workspaceUri.with({ path: Path.join(workspaceUri.path, "src/lib/hello.mbt") }),
+      vscode.Uri.joinPath(workspaceUri, "src/lib/hello.mbt"),
       new vscode.Position(1, 0)
     )
   ));

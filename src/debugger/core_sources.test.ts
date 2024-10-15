@@ -8,7 +8,7 @@ test("core sources", async () => {
   const workspaceUri = vscode.workspace.workspaceFolders![0].uri;
   using _autoDispose1 = await addBreakpoint(new vscode.SourceBreakpoint(
     new vscode.Location(
-      workspaceUri.with({ path: Path.join(workspaceUri.path, "src/main/main.mbt") }),
+      vscode.Uri.joinPath(workspaceUri, "src/main/main.mbt"),
       new vscode.Position(2, 0)
     )
   ));
